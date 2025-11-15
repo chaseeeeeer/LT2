@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Girly HTML5 Canvas Graphics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: #fce4ec; /* Light Pink Background */
+        }
+        .canvas-container {
+            text-align: center;
+            border: 2px dashed #ff80ab; /* Hot Pink Border */
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="canvas-container">
+        <h3>1. Pink Glitter Square</h3>
+        <canvas id="canvas1" width="200" height="200"></canvas>
+    </div>
+    
+    <div class="canvas-container">
+        <h3>2. Radial Gem</h3>
+        <canvas id="canvas2" width="200" height="200"></canvas>
+    </div>
+
+    <div class="canvas-container">
+        <h3>3. Cute Heart Shape</h3>
+        <canvas id="canvas3" width="200" height="200"></canvas>
+    </div>
+
+    <div class="canvas-container">
+        <h3>4. Sparkly Text</h3>
+        <canvas id="canvas4" width="200" height="200"></canvas>
+    </div>
+
+    <div class="canvas-container">
+        <h3>5. Layered Circles (Donut)</h3>
+        <canvas id="canvas5" width="200" height="200"></canvas>
+    </div>
+    
+    <div class="canvas-container">
+        <h3>6. Curved Ribbon</h3>
+        <canvas id="canvas6" width="200" height="200"></canvas>
+    </div>
+    
+    <div class="canvas-container">
+        <h3>7. Shimmering Star</h3>
+        <canvas id="canvas7" width="200" height="200"></canvas>
+    </div>
+
+    <div class="canvas-container">
+        <h3>8. Pastel Swirl (Arc/Line)</h3>
+        <canvas id="canvas8" width="200" height="200"></canvas>
+    </div>
+    
+    <div class="canvas-container">
+        <h3>9. Chevron Pattern</h3>
+        <canvas id="canvas9" width="200" height="200"></canvas>
+    </div>
+
+    <div class="canvas-container">
+        <h3>10. Polka Dot Background</h3>
+        <canvas id="canvas10" width="200" height="200"></canvas>
+    </div>
+    
+    <div class="canvas-container">
+        <h3>11. Shadowed Icons</h3>
+        <canvas id="canvas11" width="200" height="200"></canvas>
+    </div>
+    
+    <div class="canvas-container">
+        <h3>12. Diamond Grid</h3>
+        <canvas id="canvas12" width="200" height="200"></canvas>
+    </div>
+
+
+    <script>
+        // Common context setup function
+        function setupCanvas(id) {
+            const canvas = document.getElementById(id);
+            if (canvas.getContext) {
+                return canvas.getContext('2d');
+            }
+            return null;
+        }
+
+        // --- 1. Pink Glitter Square (Using Linear Gradient & fillRect) ---
+        (function() {
+            const ctx = setupCanvas('canvas1');
+            if (!ctx) return;
+            
+            const gradient = ctx.createLinearGradient(0, 0, 200, 200);
+            gradient.addColorStop(0, '#ffc0cb'); 
+            gradient.addColorStop(0.5, '#f48fb1'); 
+            gradient.addColorStop(1, '#e91e63'); 
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(20, 20, 160, 160); 
+            
+            ctx.strokeStyle = '#880e4f'; 
+            ctx.lineWidth = 5;
+            ctx.strokeRect(20, 20, 160, 160);
+        })();
+
+        // --- 2. Radial Gem (Using Radial Gradient & arc) ---
+        (function() {
+            const ctx = setupCanvas('canvas2');
+            if (!ctx) return;
+            
+            const gradient = ctx.createRadialGradient(100, 100, 5, 100, 100, 80);
+            gradient.addColorStop(0, 'white');
+            gradient.addColorStop(0.3, '#bbdefb'); 
+            gradient.addColorStop(1, '#42a5f5'); 
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(100, 100, 80, 0, Math.PI * 2, true); 
+            ctx.fill();
+            
+            ctx.strokeStyle = '#0d47a1'; 
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        })();
+
+        // --- 3. Cute Heart Shape (Using quadraticCurveTo) ---
+        (function() {
+            const ctx = setupCanvas('canvas3');
+            if (!ctx) return;
+            
+            const x = 100;
+            const y = 80;
+            const width = 120;
+            const height = 120;
+            const curveAdjust = 25; 
+
+            ctx.beginPath();
+            ctx.moveTo(x, y + height / 3); 
+            
+            // Left Arc
+            ctx.quadraticCurveTo(x - width/2, y - height/3 + curveAdjust, x - width/2, y);
+            ctx.quadraticCurveTo(x - width/2, y + height/3 + curveAdjust, x, y + height);
+            
+            // Right Arc
+            ctx.quadraticCurveTo(x + width/2, y + height/3 + curveAdjust, x + width/2, y);
+            ctx.quadraticCurveTo(x + width/2, y - height/3 + curveAdjust, x, y + height / 3);
+            
+            ctx.closePath();
+            ctx.fillStyle = '#ff69b4'; 
+            ctx.shadowColor = '#d63384'; 
+            ctx.shadowBlur = 10;
+            ctx.fill();
+            
+            ctx.shadowBlur = 0;
+        })();
+
+        // --- 4. Sparkly Text (Using fillText and shadow) ---
+        (function() {
+            const ctx = setupCanvas('canvas4');
+            if (!ctx) return;
+            
+            ctx.font = 'bold 30px fantasy';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            ctx.shadowColor = '#ffeb3b'; 
+            ctx.shadowBlur = 15;
+            
+            ctx.fillStyle = '#9c27b0'; 
+            ctx.fillText("Sparkle", 100, 90);
+            
+            ctx.font = '20px serif';
+            ctx.shadowColor = 'transparent';
+            ctx.fillStyle = '#00bcd4'; 
+            ctx.fillText("✨ Magic", 100, 130);
+        })();
+
+        // --- 5. Layered Circles (Donut) (Using arc and stroke) ---
+        (function() {
+            const ctx = setupCanvas('canvas5');
+            if (!ctx) return;
+
+            const centerX = 100;
+            const centerY = 100;
+
+            // Outer ring (Pink)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
+            ctx.strokeStyle = '#ff80ab'; 
+            ctx.lineWidth = 25;
+            ctx.stroke();
+
+            // Middle ring (Yellow)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 45, 0, Math.PI * 2);
+            ctx.strokeStyle = '#ffd740'; 
+            ctx.lineWidth = 20;
+            ctx.stroke();
+            
+            // Inner circle (Purple)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 15, 0, Math.PI * 2);
+            ctx.fillStyle = '#b39ddb'; 
+            ctx.fill();
+        })();
+        
+        // --- 6. Curved Ribbon (Using lineTo and stroke) ---
+        (function() {
+            const ctx = setupCanvas('canvas6');
+            if (!ctx) return;
+            
+            ctx.beginPath();
+            ctx.moveTo(20, 50); 
+            
+            // Upper curve
+            ctx.bezierCurveTo(80, 0, 120, 100, 180, 50); 
+            
+            // Lower curve (for ribbon effect)
+            ctx.lineTo(180, 150);
+            ctx.bezierCurveTo(120, 200, 80, 100, 20, 150);
+            
+            ctx.closePath();
+            
+            ctx.fillStyle = '#a8e6cf'; 
+            ctx.fill();
+            
+            ctx.strokeStyle = '#6ab04c'; 
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        })();
+        
+        // --- 7. Shimmering Star (Using path and multiple gradients) ---
+        (function() {
+            const ctx = setupCanvas('canvas7');
+            if (!ctx) return;
+            
+            function drawStar(cx, cy, spikes, outerRadius, innerRadius) {
+                let rot = Math.PI / 2 * 3;
+                let x = cx;
+                let y = cy;
+                let step = Math.PI / spikes;
+
+                ctx.beginPath();
+                ctx.moveTo(cx, cy - outerRadius);
+                for (let i = 0; i < spikes; i++) {
+                    x = cx + Math.cos(rot) * outerRadius;
+                    y = cy + Math.sin(rot) * outerRadius;
+                    ctx.lineTo(x, y);
+                    rot += step;
+
+                    x = cx + Math.cos(rot) * innerRadius;
+                    y = cy + Math.sin(rot) * innerRadius;
+                    ctx.lineTo(x, y);
+                    rot += step;
+                }
+                ctx.closePath();
+            }
+
+            drawStar(100, 100, 5, 80, 40);
+            
+            const gradient = ctx.createRadialGradient(100, 100, 10, 100, 100, 80);
+            gradient.addColorStop(0, '#ffccbc'); 
+            gradient.addColorStop(0.5, '#ff7043'); 
+            gradient.addColorStop(1, '#bf360c'); 
+
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            ctx.strokeStyle = '#880e4f';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        })();
+
+        // --- 8. Pastel Swirl (Arc/Line) (Using arc and lines) ---
+        (function() {
+            const ctx = setupCanvas('canvas8');
+            if (!ctx) return;
+            
+            const centerX = 100;
+            const centerY = 100;
+            const colorStops = ['#f8bbd0', '#e1bee7', '#c5cae9', '#bbdefb', '#b2ebf2']; 
+
+            for (let i = 0; i < 5; i++) {
+                const radius = 20 + i * 15;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, Math.PI * 1.5); 
+                
+                ctx.strokeStyle = colorStops[i];
+                ctx.lineWidth = 10;
+                ctx.stroke();
+            }
+        })();
+
+        // --- 9. Chevron Pattern (Using fillRect and transforming coordinates) ---
+        (function() {
+            const ctx = setupCanvas('canvas9');
+            if (!ctx) return;
+
+            ctx.fillStyle = '#fce4ec'; // Pale background
+            ctx.fillRect(0, 0, 200, 200);
+
+            ctx.fillStyle = '#e91e63'; // Deep Pink for stripes
+            const stripHeight = 30;
+
+            for (let i = -2; i < 8; i++) {
+                ctx.beginPath();
+                
+                // A large V-shape that repeats
+                const y = i * stripHeight * 2;
+                ctx.moveTo(0, y + stripHeight);
+                ctx.lineTo(100, y);
+                ctx.lineTo(200, y + stripHeight);
+                ctx.lineTo(200, y + stripHeight * 2);
+                ctx.lineTo(100, y + stripHeight);
+                ctx.lineTo(0, y + stripHeight * 2);
+
+                ctx.closePath();
+                ctx.fill();
+            }
+        })();
+
+        // --- 10. Polka Dot Background (Using arc and fill) ---
+        (function() {
+            const ctx = setupCanvas('canvas10');
+            if (!ctx) return;
+            
+            ctx.fillStyle = '#90caf9'; // Light Blue Background
+            ctx.fillRect(0, 0, 200, 200);
+
+            const dotColor = '#f06292'; // Coral Pink Dots
+            const dotSize = 10;
+            const spacing = 40;
+
+            for (let x = spacing / 2; x < 200; x += spacing) {
+                for (let y = spacing / 2; y < 200; y += spacing) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, dotSize / 2, 0, Math.PI * 2);
+                    ctx.fillStyle = dotColor;
+                    ctx.fill();
+                }
+            }
+        })();
+
+        // --- 11. Shadowed Icons (Lipstick and Heart) (Using fillText and shadows) ---
+        (function() {
+            const ctx = setupCanvas('canvas11');
+            if (!ctx) return;
+
+            ctx.font = '60px serif'; // Using a font that supports emojis/icons well
+            ctx.textAlign = 'center';
+
+            // Top Icon (Lipstick)
+            ctx.shadowColor = '#d63384';
+            ctx.shadowOffsetX = 4;
+            ctx.shadowOffsetY = 4;
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = '#a1887f'; // Brownish/metallic color
+            ctx.fillText("💄", 100, 80); // Lipstick emoji (or equivalent text if font doesn't load)
+
+            // Bottom Icon (Heart)
+            ctx.shadowColor = '#4a148c';
+            ctx.shadowOffsetX = -4;
+            ctx.shadowOffsetY = 4;
+            ctx.shadowBlur = 5;
+            ctx.fillStyle = '#ce93d8'; // Light Purple
+            ctx.fillText("💜", 100, 150); // Purple Heart emoji
+
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+        })();
+
+        // --- 12. Diamond Grid (Using lineTo and stroke) ---
+        (function() {
+            const ctx = setupCanvas('canvas12');
+            if (!ctx) return;
+            
+            ctx.strokeStyle = '#ffd54f'; // Yellow Outline
+            ctx.lineWidth = 2;
+            
+            const step = 40; // Spacing for grid points
+
+            // Draw grid lines diagonally
+            for (let i = -5; i < 10; i++) {
+                ctx.beginPath();
+                // Diagonal lines from bottom-left to top-right
+                ctx.moveTo(i * step, 0);
+                ctx.lineTo(i * step + 200, 200);
+                ctx.stroke();
+
+                ctx.beginPath();
+                // Diagonal lines from top-left to bottom-right
+                ctx.moveTo(i * step + 200, 0);
+                ctx.lineTo(i * step, 200);
+                ctx.stroke();
+            }
+            
+            // Add a vibrant overlay circle
+            ctx.beginPath();
+            ctx.arc(100, 100, 20, 0, Math.PI * 2);
+            ctx.fillStyle = '#ff8a80'; // Bright Coral Center
+            ctx.fill();
+        })();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SVG Poem Art - Music Note</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        #music-note-path {
+            fill: none;
+            stroke: #a0a0a0; /* Changed to make the path visible, light grey */
+            stroke-width: 1px; /* Subtle stroke to show the path */
+        }
+
+        .note-text {
+            font-size: 22px; /* Slightly adjusted font size */
+            font-weight: bold;
+            fill: #004d40; /* Dark teal */
+            letter-spacing: 1px; /* Increased for better legibility on a curved path */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Added subtle shadow for depth */
+        }
+
+        .center-text {
+            font-size: 70px; /* Slightly smaller for better fit */
+            fill: #d9534f; /* Reddish color */
+            font-weight: bold;
+            font-family: 'Arial Black', sans-serif;
+            text-anchor: middle;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.2); /* Added shadow */
+        }
+
+        /* Styles for the visual music note elements */
+        .music-note-fill {
+            fill: #333; /* Dark color for the note head */
+            stroke: #333;
+            stroke-width: 2px;
+        }
+        .music-note-stem {
+            fill: none;
+            stroke: #333;
+            stroke-width: 12px; /* Slightly thicker stem */
+            stroke-linecap: round;
+        }
+        .music-note-flag {
+            fill: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Melody of Life</h1>
+
+    <svg width="900" height="780" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 780">
+
+        <defs>
+            <path id="music-note-path"
+                  d="M 470 650 
+                     C 420 550, 520 450, 470 350 
+                     S 420 250, 520 150 
+                     L 540 150 
+                     C 570 170, 570 200, 540 220 Z" 
+                  fill="none"
+                  stroke="#a0a0a0" /> </defs>
+
+        <circle cx="470" cy="650" r="40" class="music-note-fill" />
+        <line x1="505" y1="650" x2="505" y2="150" class="music-note-stem" />
+        <path d="M 510 150 C 600 180, 600 250, 510 280 Z" class="music-note-flag" />
+
+        <text class="note-text">
+            <textPath href="#music-note-path"
+                      startOffset="0%"
+                      textLength="700"
+                      lengthAdjust="spacingAndGlyphs">
+                In every beat, a life's sweet song, where echoes dance and feelings throng.
+                Each high, each low, a vibrant sound, on life's grand staff, our joy is found.
+            </textPath>
+        </text>
+
+        <text class="center-text" x="470" y="665" dy="25">
+            MELODY
+        </text>
+
+    </svg>
+
+</body>
+</html>
